@@ -4,6 +4,7 @@ import express from 'express';
   import authRoutes from './modules/auth/auth.routes';
   import employeeRoutes from './modules/employee/employee.routes';
    import attendanceRoutes from './modules/attendance/attendance.routes';
+import leaveRoutes from './modules/leave/leave.routes';
 
   dotenv.config();
 
@@ -17,6 +18,7 @@ import express from 'express';
   app.use('/api/auth', authRoutes);
   app.use('/api/employees', employeeRoutes);
   app.use('/api/attendance', attendanceRoutes);
+  app.use('/api/leave', leaveRoutes);
 
   app.get('/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date().toISOString() });
