@@ -1,10 +1,11 @@
-import express from 'express';                                                                     
+  import express from 'express';
   import cors from 'cors';
   import dotenv from 'dotenv';
   import authRoutes from './modules/auth/auth.routes';
   import employeeRoutes from './modules/employee/employee.routes';
-   import attendanceRoutes from './modules/attendance/attendance.routes';
-import leaveRoutes from './modules/leave/leave.routes';
+  import attendanceRoutes from './modules/attendance/attendance.routes';
+  import leaveRoutes from './modules/leave/leave.routes';
+  import organizationRoutes from './modules/organization/oraganization.routes';
 
   dotenv.config();
 
@@ -19,6 +20,7 @@ import leaveRoutes from './modules/leave/leave.routes';
   app.use('/api/employees', employeeRoutes);
   app.use('/api/attendance', attendanceRoutes);
   app.use('/api/leave', leaveRoutes);
+  app.use('/api/organization', organizationRoutes);
 
   app.get('/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date().toISOString() });
