@@ -3,6 +3,7 @@ import express from 'express';
   import dotenv from 'dotenv';
   import authRoutes from './modules/auth/auth.routes';
   import employeeRoutes from './modules/employee/employee.routes';
+   import attendanceRoutes from './modules/attendance/attendance.routes';
 
   dotenv.config();
 
@@ -15,6 +16,7 @@ import express from 'express';
   // Routes
   app.use('/api/auth', authRoutes);
   app.use('/api/employees', employeeRoutes);
+  app.use('/api/attendance', attendanceRoutes);
 
   app.get('/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date().toISOString() });
