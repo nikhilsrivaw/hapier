@@ -2,6 +2,7 @@ import express from 'express';
   import cors from 'cors';
   import dotenv from 'dotenv';
   import authRoutes from './modules/auth/auth.routes';
+  import employeeRoutes from './modules/employee/employee.routes';
 
   dotenv.config();
 
@@ -13,6 +14,7 @@ import express from 'express';
 
   // Routes
   app.use('/api/auth', authRoutes);
+  app.use('/api/employees', employeeRoutes);
 
   app.get('/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date().toISOString() });
