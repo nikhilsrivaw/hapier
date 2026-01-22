@@ -1,13 +1,20 @@
-  {
+{
     "name": "hapier",
     "private": true,
     "workspaces": [
-      "apps/*",
-      "packages/*"
+        "apps/*",
+        "packages/*"
     ],
     "scripts": {
-      "dev:web": "npm run dev --workspace=apps/web",
-      "dev:api": "npm run dev --workspace=apps/api",
-      "dev": "npm run dev:api & npm run dev:web"
+        "dev:web": "npm run dev --workspace=apps/web",
+        "dev:api": "npm run dev --workspace=apps/api",
+        "dev": "npm run dev:api & npm run dev:web"
+    },
+    "dependencies": {
+        "@hookform/resolvers": "^5.2.2",
+        "axios": "^1.13.2",
+        "react-hook-form": "^7.71.1",
+        "zod": "^4.3.5",
+        "zustand": "^5.0.10"
     }
-  }
+}
