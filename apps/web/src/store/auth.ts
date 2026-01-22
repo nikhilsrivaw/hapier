@@ -1,7 +1,6 @@
-
-  import { create } from 'zustand';
-  import { User, Organization } from '@/types';
-  import api from '@/lib/api';
+  import { create } from 'zustand';                                                            
+  import { User, Organization, AuthResponse } from '@/types';
+  import { authService } from '@/services/auth.service';
 
   interface AuthState {
     user: User | null;
@@ -27,44 +26,46 @@
     isLoading: true,
     isAuthenticated: false,
 
-    login: async (email, password) => {
-      const response = await api.post('/auth/login', { email, password });
-      const { token, user, organization } = response.data;
+    login: async (email: string, password: string) => {
+      const response: AuthResponse = await authService.login({ email, password });
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('organization', JSON.stringify(organization));
+      authService.saveAuth(response);
 
-      set({ user, organization, isAuthenticated: true });
+      set({
+        user: response.user,
+        organization: response.organization,
+        isAuthenticated: true,
+      });
     },
 
     register: async (data) => {
-      const response = await api.post('/auth/register', data);
-      const { token, user, organization } = response.data;
+      const response: AuthResponse = await authService.register(data);
 
-      localStorage.setItem('token', token);
-      localStorage.setItem('user', JSON.stringify(user));
-      localStorage.setItem('organization', JSON.stringify(organization));
+      authService.saveAuth(response);
 
-      set({ user, organization, isAuthenticated: true });
+      set({
+        user: response.user,
+        organization: response.organization,
+        isAuthenticated: true,
+      });
     },
 
     logout: () => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      localStorage.removeItem('organization');
-      set({ user: null, organization: null, isAuthenticated: false });
+      authService.clearAuth();
+      set({
+        user: null,
+        organization: null,
+        isAuthenticated: false,
+      });
     },
 
     checkAuth: () => {
-      const token = localStorage.getItem('token');
-      const userStr = localStorage.getItem('user');
-      const orgStr = localStorage.getItem('organization');
+      const { user, organization, token } = authService.getStoredAuth();
 
-      if (token && userStr && orgStr) {
+      if (token && user && organization) {
         set({
-          user: JSON.parse(userStr),
-          organization: JSON.parse(orgStr),
+          user,
+          organization,
           isAuthenticated: true,
           isLoading: false,
         });
