@@ -1,7 +1,11 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+  import type { NextConfig } from 'next';
 
-export default nextConfig;
+  const nextConfig: NextConfig = {
+    experimental: {
+      optimizePackageImports: ['lucide-react', 'framer-motion', '@radix-ui/react-icons'],
+    },
+  };
+
+  export default nextConfig;
+

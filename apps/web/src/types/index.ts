@@ -34,6 +34,7 @@
     id: string;
     email: string;
     role: Role;
+    employeeId: string | null;
   }
 
   export interface Organization {
