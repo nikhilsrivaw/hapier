@@ -1,8 +1,10 @@
- 'use client';
+'use client';
 
-  import { useState } from 'react';
+  import { useState, useEffect } from 'react';
+  import { useRouter } from 'next/navigation';
   import { motion } from 'framer-motion';
-  import { useAuth } from '@/hooks/useAuth';
+  import { useAuthStore } from '@/store/auth';
+  import { ROUTES } from '@/config/constants';
   import { PageLoader } from '@/components/common';
   import Navbar from './Navbar';
   import Sidebar from './Sidebar';
@@ -12,15 +14,31 @@
   }
 
   export default function DashboardLayout({ children }: DashboardLayoutProps) {
-    const { isLoading, isAuthenticated } = useAuth();
+    const router = useRouter();
+    const { user, isLoading, checkAuth } = useAuthStore();
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
     const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+    const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
 
-    if (isLoading) {
+    useEffect(() => {
+      if (!hasCheckedAuth) {
+        checkAuth();
+        setHasCheckedAuth(true);
+      }
+    }, [checkAuth, hasCheckedAuth]);
+
+    useEffect(() => {
+      if (hasCheckedAuth && !isLoading && !user) {
+        router.push(ROUTES.LOGIN);
+      }
+    }, [hasCheckedAuth, isLoading, user, router]);
+
+    // Show loader only on initial load
+    if (!hasCheckedAuth || isLoading) {
       return <PageLoader />;
     }
 
-    if (!isAuthenticated) {
+    if (!user) {
       return null;
     }
 
