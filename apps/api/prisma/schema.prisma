@@ -20,6 +20,7 @@
     employees   Employee[]
     departments Department[]
     leaveTypes  LeaveType[]
+    tasks       Task[]  
   }
 
   // Authentication & access control
@@ -90,6 +91,8 @@
 
     attendances   Attendance[]
     leaveRequests LeaveRequest[]
+    assignedTasks Task[] @relation("TaskAssignee")
+    createdTasks  Task[] @relation("TaskCreator")
   }
 
   enum Gender {
@@ -165,4 +168,39 @@
     APPROVED
     REJECTED
     CANCELLED
+  }
+
+    // ============== TASK ==============
+  model Task {
+    id          String       @id @default(cuid())
+    title       String
+    description String?
+    status      TaskStatus   @default(TODO)
+    priority    TaskPriority @default(MEDIUM)
+    dueDate     DateTime?
+    createdAt   DateTime     @default(now())
+    updatedAt   DateTime     @updatedAt
+
+    organizationId String
+    organization   Organization @relation(fields: [organizationId], references: [id])
+
+    assigneeId String?
+    assignee   Employee? @relation("TaskAssignee", fields: [assigneeId], references: [id])
+
+    creatorId String
+    creator   Employee @relation("TaskCreator", fields: [creatorId], references: [id])
+  }
+
+  enum TaskStatus {
+    TODO
+    IN_PROGRESS
+    REVIEW
+    DONE
+  }
+
+  enum TaskPriority {
+    LOW
+    MEDIUM
+    HIGH
+    URGENT
   }

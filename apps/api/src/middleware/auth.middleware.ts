@@ -8,6 +8,7 @@ import { Request, Response, NextFunction } from 'express';
       userId: string;
       role: string;
       orgId: string;
+      employeeId: string | null;
     };
   }
 
@@ -25,6 +26,7 @@ import { Request, Response, NextFunction } from 'express';
         userId: string;
         role: string;
         orgId: string;
+         employeeId: string | null;
       };
 
       req.user = decoded;
