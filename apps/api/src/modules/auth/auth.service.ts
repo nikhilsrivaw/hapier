@@ -73,7 +73,7 @@ export const authService = {
 
     // Generate token
     const token = jwt.sign(
-      { userId: result.user.id, role: result.user.role, orgId: result.organization.id },
+      { userId: result.user.id, role: result.user.role, orgId: result.organization.id,employeeId: result.employee.id },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
@@ -92,6 +92,30 @@ export const authService = {
       },
     };
   },
+  async changePassword(userId: string, currentPassword: string, newPassword: string) {
+      const user = await prisma.user.findUnique({
+          where: { id: userId },
+      });
+
+      if (!user) {
+          throw new Error('User not found');
+      }
+
+      const isValid = await bcrypt.compare(currentPassword, user.passwordHash);
+      if (!isValid) {
+          throw new Error('Current password is incorrect');
+      }
+
+      const newHash = await bcrypt.hash(newPassword, 10);
+
+      await prisma.user.update({
+          where: { id: userId },
+          data: { passwordHash: newHash },
+      });
+
+      return { message: 'Password changed successfully' };
+  },
+
 
   async login(email: string, password: string) {
     const user = await prisma.user.findUnique({
@@ -112,7 +136,7 @@ export const authService = {
     }
 
     const token = jwt.sign(
-      { userId: user.id, role: user.role, orgId: user.organizationId },
+      { userId: user.id, role: user.role, orgId: user.organizationId ,employeeId: user.employee?.id || null  },
       JWT_SECRET,
       { expiresIn: '7d' }
     );
