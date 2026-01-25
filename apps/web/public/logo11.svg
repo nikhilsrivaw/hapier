@@ -1,0 +1,26 @@
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="infGrad" x1="0" y1="24" x2="48" y2="24">
+        <stop stop-color="#0891b2"/>
+        <stop offset="0.5" stop-color="#0ea5e9"/>
+        <stop offset="1" stop-color="#38bdf8"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="16" fill="#0c4a6e"/>
+
+    <!-- Infinity loop with people heads -->
+    <path d="M14 24
+             C14 18 18 14 24 20
+             C30 26 34 22 34 24
+             C34 26 34 30 28 30
+             C22 30 24 26 24 24
+             C24 22 14 30 14 24Z"
+          stroke="url(#infGrad)"
+          stroke-width="4"
+          stroke-linecap="round"
+          fill="none"/>
+    <!-- Left head -->
+    <circle cx="10" cy="24" r="5" fill="url(#infGrad)"/>
+    <!-- Right head -->
+    <circle cx="38" cy="24" r="5" fill="url(#infGrad)"/>
+  </svg>

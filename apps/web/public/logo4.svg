@@ -1,0 +1,18 @@
+ <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="iconGrad" x1="4" y1="4" x2="44" y2="44">
+        <stop stop-color="#f43f5e"/>
+        <stop offset="1" stop-color="#e11d48"/>
+      </linearGradient>
+    </defs>
+    <rect x="2" y="2" width="44" height="44" rx="12" fill="url(#iconGrad)"/>
+    <!-- Person silhouette with raised arms (celebrating) -->
+    <circle cx="24" cy="13" r="5" fill="white"/>
+    <path d="M24 20C18 20 14 25 14 31V38H34V31C34 25 30 20 24 20Z" fill="white"/>
+    <!-- Raised arms forming partial H -->
+    <path d="M14 22L8 14" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <path d="M34 22L40 14" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    <!-- Small smile -->
+    <path d="M20 32C20 32 22 34 24 34C26 34 28 32 28 32" stroke="#f43f5e" stroke-width="2"
+  stroke-linecap="round"/>
+  </svg>

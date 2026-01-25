@@ -1,0 +1,29 @@
+  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="unityGrad" x1="0" y1="24" x2="48" y2="24">
+        <stop stop-color="#ec4899"/>
+        <stop offset="0.5" stop-color="#f43f5e"/>
+        <stop offset="1" stop-color="#f97316"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="16" fill="#0f172a"/>
+    <!-- Single continuous line art -->
+    <path d="M8 36
+             C8 36 8 20 8 16
+             C8 12 10 10 14 10
+             C18 10 18 14 18 16
+             C18 14 18 10 22 10
+             C26 10 26 14 26 16
+             L26 24
+             L30 24
+             C30 24 30 14 30 16
+             C30 14 30 10 34 10
+             C38 10 38 14 38 16
+             C38 14 40 10 40 16
+             C40 20 40 36 40 36"
+          stroke="url(#unityGrad)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"/>
+  </svg>

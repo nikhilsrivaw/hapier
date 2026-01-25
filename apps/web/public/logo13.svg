@@ -1,0 +1,54 @@
+ <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="pulseGrad" x1="0" y1="24" x2="48" y2="24">
+        <stop stop-color="#dc2626"/>
+        <stop offset="0.3" stop-color="#f43f5e"/>
+        <stop offset="0.7" stop-color="#f43f5e"/>
+        <stop offset="1" stop-color="#dc2626"/>
+      </linearGradient>
+      <filter id="glow">
+        <feGaussianBlur stdDeviation="1" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- Dark premium background -->
+    <rect width="48" height="48" rx="14" fill="#18181b"/>
+
+    <!-- Subtle grid pattern for tech feel -->
+    <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+      <path d="M 8 0 L 0 0 0 8" fill="none" stroke="#27272a" stroke-width="0.5"/>
+    </pattern>
+    <rect width="48" height="48" rx="14" fill="url(#grid)"/>
+
+    <!-- The pulse line forming H + heartbeat -->
+    <path d="M4 26
+             L12 26
+             L14 26
+             L14 12
+             L18 12
+             L18 26
+             L20 26
+             L22 18
+             L24 34
+             L26 18
+             L28 26
+             L30 26
+             L30 12
+             L34 12
+             L34 26
+             L36 26
+             L44 26"
+          stroke="url(#pulseGrad)"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"
+          filter="url(#glow)"/>
+
+    <!-- Subtle dot accents -->
+    <circle cx="24" cy="8" r="2" fill="#f43f5e" opacity="0.6"/>
+  </svg>
