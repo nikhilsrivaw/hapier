@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 
   import { useState, useEffect } from 'react';
   import { useRouter } from 'next/navigation';
@@ -10,71 +10,70 @@
   import Sidebar from './Sidebar';
 
   interface DashboardLayoutProps {
-    children: React.ReactNode;
+      children: React.ReactNode;
   }
 
   export default function DashboardLayout({ children }: DashboardLayoutProps) {
-    const router = useRouter();
-    const { user, isLoading, checkAuth } = useAuthStore();
-    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-    const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
-    const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
+      const router = useRouter();
+      const { user, isLoading, checkAuth } = useAuthStore();
+      const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+      const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+      const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
 
-    useEffect(() => {
-      if (!hasCheckedAuth) {
-        checkAuth();
-        setHasCheckedAuth(true);
+      useEffect(() => {
+          if (!hasCheckedAuth) {
+              checkAuth();
+              setHasCheckedAuth(true);
+          }
+      }, [checkAuth, hasCheckedAuth]);
+
+      useEffect(() => {
+          if (hasCheckedAuth && !isLoading && !user) {
+              router.push(ROUTES.LOGIN);
+          }
+      }, [hasCheckedAuth, isLoading, user, router]);
+
+      if (!hasCheckedAuth || isLoading) {
+          return <PageLoader />;
       }
-    }, [checkAuth, hasCheckedAuth]);
 
-    useEffect(() => {
-      if (hasCheckedAuth && !isLoading && !user) {
-        router.push(ROUTES.LOGIN);
+      if (!user) {
+          return null;
       }
-    }, [hasCheckedAuth, isLoading, user, router]);
 
-    // Show loader only on initial load
-    if (!hasCheckedAuth || isLoading) {
-      return <PageLoader />;
-    }
+      return (
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
+              <Navbar onMenuClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} />
 
-    if (!user) {
-      return null;
-    }
+              {/* Desktop Sidebar */}
+              <div className="hidden lg:block">
+                  <Sidebar isCollapsed={sidebarCollapsed} setIsCollapsed={setSidebarCollapsed} />       
+              </div>
 
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar onMenuClick={() => setMobileSidebarOpen(!mobileSidebarOpen)} />
+              {/* Mobile Sidebar Overlay */}
+              {mobileSidebarOpen && (
+                  <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className="fixed inset-0 bg-black/50 z-30 lg:hidden"
+                  />
+              )}
 
-        {/* Desktop Sidebar */}
-        <div className="hidden lg:block">
-          <Sidebar isCollapsed={sidebarCollapsed} setIsCollapsed={setSidebarCollapsed} />
-        </div>
+              {/* Main Content */}
+              <motion.main
+                  animate={{ marginLeft: sidebarCollapsed ? 80 : 256 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className="pt-16 min-h-screen hidden lg:block"
+              >
+                  <div className="p-6">{children}</div>
+              </motion.main>
 
-        {/* Mobile Sidebar Overlay */}
-        {mobileSidebarOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setMobileSidebarOpen(false)}
-            className="fixed inset-0 bg-black/50 z-30 lg:hidden"
-          />
-        )}
-
-        {/* Main Content */}
-        <motion.main
-          animate={{ marginLeft: sidebarCollapsed ? 80 : 256 }}
-          transition={{ duration: 0.3, ease: 'easeInOut' }}
-          className="pt-16 min-h-screen hidden lg:block"
-        >
-          <div className="p-6">{children}</div>
-        </motion.main>
-
-        {/* Mobile Main Content */}
-        <main className="pt-16 min-h-screen lg:hidden">
-          <div className="p-4">{children}</div>
-        </main>
-      </div>
-    );
+              {/* Mobile Main Content */}
+              <main className="pt-16 min-h-screen lg:hidden">
+                  <div className="p-4">{children}</div>
+              </main>
+          </div>
+      );
   }

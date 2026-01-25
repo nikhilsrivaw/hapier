@@ -21,6 +21,7 @@
     departments Department[]
     leaveTypes  LeaveType[]
     tasks       Task[]  
+    projects Project[]
   }
 
   // Authentication & access control
@@ -93,6 +94,7 @@
     leaveRequests LeaveRequest[]
     assignedTasks Task[] @relation("TaskAssignee")
     createdTasks  Task[] @relation("TaskCreator")
+    ownedProjects Project[] @relation("ProjectOwner")
   }
 
   enum Gender {
@@ -189,6 +191,8 @@
 
     creatorId String
     creator   Employee @relation("TaskCreator", fields: [creatorId], references: [id])
+    projectId String?
+    project   Project? @relation(fields: [projectId], references: [id])
   }
 
   enum TaskStatus {
@@ -204,3 +208,34 @@
     HIGH
     URGENT
   }
+
+  // ============== PROJECT ==============
+  model Project {
+    id          String        @id @default(cuid())
+    name        String
+    description String?
+    status      ProjectStatus @default(ACTIVE)
+    startDate   DateTime?
+    endDate     DateTime?
+    createdAt   DateTime      @default(now())
+    updatedAt   DateTime      @updatedAt
+
+    organizationId String
+    organization   Organization @relation(fields: [organizationId], references: [id])
+
+    ownerId String
+    owner   Employee @relation("ProjectOwner", fields: [ownerId], references: [id])
+
+    tasks Task[]
+  }
+
+  enum ProjectStatus {
+    ACTIVE
+    ON_HOLD
+    COMPLETED
+    CANCELLED
+  }
+
+
+
+  

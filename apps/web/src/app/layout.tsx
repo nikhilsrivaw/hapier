@@ -1,4 +1,5 @@
- import type { Metadata } from 'next';
+
+  import type { Metadata } from 'next';
   import { Inter } from 'next/font/google';
   import './globals.css';
   import Providers from './provider';
@@ -7,23 +8,23 @@
   const inter = Inter({ subsets: ['latin'] });
 
   export const metadata: Metadata = {
-    title: {
-      default: APP_NAME,
-      template: `%s | ${APP_NAME}`,
-    },
-    description: APP_DESCRIPTION,
+      title: {
+          default: APP_NAME,
+          template: `%s | ${APP_NAME}`,
+      },
+      description: APP_DESCRIPTION,
   };
 
   export default function RootLayout({
-    children,
+      children,
   }: {
-    children: React.ReactNode;
+      children: React.ReactNode;
   }) {
-    return (
-      <html lang="en">
-        <body className={inter.className}>
-          <Providers>{children}</Providers>
-        </body>
-      </html>
-    );
+      return (
+          <html lang="en" suppressHydrationWarning>
+              <body className={inter.className}>
+                  <Providers>{children}</Providers>
+              </body>
+          </html>
+      );
   }
