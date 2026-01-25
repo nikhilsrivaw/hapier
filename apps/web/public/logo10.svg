@@ -1,0 +1,25 @@
+ <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="bloom1" x1="24" y1="4" x2="24" y2="44">
+        <stop stop-color="#fda4af"/>
+        <stop offset="1" stop-color="#e11d48"/>
+      </linearGradient>
+      <linearGradient id="bloom2" x1="4" y1="24" x2="44" y2="24">
+        <stop stop-color="#fb7185"/>
+        <stop offset="1" stop-color="#be123c"/>
+      </linearGradient>
+    </defs>
+    <!-- Clean white background with subtle shadow -->
+    <rect width="48" height="48" rx="16" fill="white"/>
+    <rect x="1" y="1" width="46" height="46" rx="15" stroke="#fecdd3" stroke-width="2" fill="none"/> 
+
+    <!-- Left petal/person -->
+    <ellipse cx="16" cy="24" rx="8" ry="14" fill="url(#bloom1)"/>
+    <!-- Right petal/person -->
+    <ellipse cx="32" cy="24" rx="8" ry="14" fill="url(#bloom1)"/>
+    <!-- Center connection (forms the H crossbar visually) -->
+    <ellipse cx="24" cy="24" rx="14" ry="8" fill="url(#bloom2)"/>
+    <!-- Core - the heart of the flower/company -->
+    <circle cx="24" cy="24" r="6" fill="white"/>
+    <circle cx="24" cy="24" r="4" fill="#e11d48"/>
+  </svg>

@@ -1,0 +1,26 @@
+ <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="grad1" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">       
+        <stop stop-color="#f43f5e"/>
+        <stop offset="0.5" stop-color="#e11d48"/>
+        <stop offset="1" stop-color="#be123c"/>
+      </linearGradient>
+      <linearGradient id="grad2" x1="0" y1="48" x2="48" y2="0" gradientUnits="userSpaceOnUse">       
+        <stop stop-color="#fb7185"/>
+        <stop offset="1" stop-color="#f43f5e"/>
+      </linearGradient>
+    </defs>
+    <!-- Background -->
+    <rect width="48" height="48" rx="12" fill="url(#grad1)"/>
+    <!-- Left person -->
+    <circle cx="14" cy="14" r="4" fill="white"/>
+    <path d="M14 20C10 20 8 23 8 27V34C8 35.1 8.9 36 10 36H18C19.1 36 20 35.1 20 34V27C20 23 18 20 14
+   20Z" fill="white"/>
+    <!-- Right person -->
+    <circle cx="34" cy="14" r="4" fill="white"/>
+    <path d="M34 20C30 20 28 23 28 27V34C28 35.1 28.9 36 30 36H38C39.1 36 40 35.1 40 34V27C40 23 38  
+  20 34 20Z" fill="white"/>
+    <!-- Connecting bridge (the H crossbar) with smile curve -->
+    <path d="M18 28C18 28 21 32 24 32C27 32 30 28 30 28" stroke="white" stroke-width="3"
+  stroke-linecap="round"/>
+  </svg>

@@ -1,0 +1,21 @@
+ <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="belongGrad" x1="0" y1="0" x2="48" y2="48">
+        <stop stop-color="#f43f5e"/>
+        <stop offset="1" stop-color="#e11d48"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="16" fill="url(#belongGrad)"/>
+    <!-- Two abstract people leaning in, creating H + heart negative space -->
+    <path d="M10 38V18C10 14 12 12 16 12C20 12 22 16 24 20C26 16 28 12 32 12C36 12 38 14 38 18V38"   
+          stroke="white"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          fill="none"/>
+    <!-- The smile that connects -->
+    <path d="M16 30C16 30 20 34 24 34C28 34 32 30 32 30"
+          stroke="white"
+          stroke-width="3"
+          stroke-linecap="round"/>
+  </svg>

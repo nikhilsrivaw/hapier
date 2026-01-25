@@ -1,0 +1,26 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">    
+    <defs>
+      <linearGradient id="trustGrad" x1="0" y1="0" x2="48" y2="48">
+        <stop stop-color="#0ea5e9"/>
+        <stop offset="0.5" stop-color="#6366f1"/>
+        <stop offset="1" stop-color="#a855f7"/>
+      </linearGradient>
+    </defs>
+    <rect width="48" height="48" rx="14" fill="url(#trustGrad)"/>
+
+    <!-- Two hands meeting in H shape -->
+    <path d="M8 14V34C8 35.1 8.9 36 10 36H14C15.1 36 16 35.1 16 34V24" stroke="white"
+  stroke-width="4" stroke-linecap="round"/>
+    <path d="M40 14V34C40 35.1 39.1 36 38 36H34C32.9 36 32 35.1 32 34V24" stroke="white"
+  stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Handshake in middle -->
+    <path d="M16 24H24L28 20" stroke="white" stroke-width="4" stroke-linecap="round"
+  stroke-linejoin="round"/>
+    <path d="M32 24H26L22 28" stroke="white" stroke-width="4" stroke-linecap="round"
+  stroke-linejoin="round"/>
+
+    <!-- Heart accent -->
+    <path d="M24 12L22 10C20 8 17 9 17 12C17 14 24 18 24 18C24 18 31 14 31 12C31 9 28 8 26 10L24 12Z"
+   fill="white"/>
+  </svg>

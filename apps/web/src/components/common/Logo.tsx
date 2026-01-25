@@ -1,6 +1,6 @@
- import Link from 'next/link';
-  import { cn } from '@/lib/utils';
-
+ import Link from 'next/link';                                                                        import Image from 'next/image';
+  import { cn } from '@/lib/utils';                                                                  
+  
   interface LogoProps {
     size?: 'sm' | 'md' | 'lg';
     showText?: boolean;
@@ -8,30 +8,25 @@
   }
 
   const sizes = {
-    sm: 'w-8 h-8 text-sm',
-    md: 'w-9 h-9 text-base',
-    lg: 'w-12 h-12 text-xl',
+    sm: { icon: 32, text: 'text-lg' },
+    md: { icon: 36, text: 'text-xl' },
+    lg: { icon: 48, text: 'text-2xl' },
   };
 
-  const textSizes = {
-    sm: 'text-lg',
-    md: 'text-xl',
-    lg: 'text-2xl',
-  };
+  export default function Logo({ size = 'md', showText = true, className }: LogoProps) {
+    const { icon, text } = sizes[size];
 
-  export default function Logo({ size = 'md', showText = true, className }: LogoProps) {       
     return (
       <Link href="/" className={cn('flex items-center gap-2', className)}>
-        <div
-          className={cn(
-            'bg-gradient-to-br from-rose-500 to-orange-500 rounded-xl flex items-center justify-center shadow-lg shadow-rose-500/20',
-            sizes[size]
-          )}
-        >
-          <span className="text-white font-bold">H</span>
-        </div>
+        <Image
+          src="/logo.svg"
+          alt="Hapier"
+          width={icon}
+          height={icon}
+          className="shadow-lg shadow-rose-500/20 rounded-xl"
+        />
         {showText && (
-          <span className={cn('font-bold text-gray-900', textSizes[size])}>
+          <span className={cn('font-bold text-gray-900', text)}>
             Hapier
           </span>
         )}
