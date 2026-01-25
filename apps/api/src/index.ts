@@ -9,6 +9,7 @@
   import departmentRoutes from './modules/department/department.routes';
   import taskRoutes from './modules/task/task.routes';
    import projectRoutes from './modules/project/project.routes';
+      import aiRoutes from './modules/ai/ai.routes'; 
 
   dotenv.config();
 
@@ -27,6 +28,8 @@
   app.use('/api/departments', departmentRoutes);
    app.use('/api/tasks', taskRoutes);
    app.use('/api/projects', projectRoutes);
+   app.use('/api/ai', aiRoutes);
+
     
 
   app.get('/health', (req, res) => {
