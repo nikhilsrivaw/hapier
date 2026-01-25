@@ -8,6 +8,7 @@
   import organizationRoutes from './modules/organization/oraganization.routes';
   import departmentRoutes from './modules/department/department.routes';
   import taskRoutes from './modules/task/task.routes';
+   import projectRoutes from './modules/project/project.routes';
 
   dotenv.config();
 
@@ -25,6 +26,8 @@
   app.use('/api/organization', organizationRoutes);
   app.use('/api/departments', departmentRoutes);
    app.use('/api/tasks', taskRoutes);
+   app.use('/api/projects', projectRoutes);
+    
 
   app.get('/health', (req, res) => {
       res.json({ status: 'ok', timestamp: new Date().toISOString() });

@@ -3,3 +3,4 @@
   export { default as PageLoader } from './PageLoader';
   export { default as ErrorMessage } from './ErrorMessage';
   export { default as EmptyState } from './EmptyState';
+    export { ThemeToggle } from './ThemeToggle';

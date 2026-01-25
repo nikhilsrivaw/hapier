@@ -43,6 +43,11 @@ export interface Task {
     lastName: string;
     email: string;
   };
+  projectId?: string;
+  project?: {
+    id: string;
+    name: string;
+  };
   creator?: {
     id: string;
     firstName: string;
@@ -51,8 +56,30 @@ export interface Task {
   createdAt: string;
   updatedAt: string;
 }
+export interface Project {
+  id: string;
+  name: string;
+  description?: string;
+  status: ProjectStatus;
+  startDate?: string;
+  endDate?: string;
+  ownerId: string;
+  owner?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email?: string;
+  };
+  tasks?: Task[];
+  _count?: {
+    tasks: number;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+export type ProjectStatus = 'ACTIVE' | 'ON_HOLD' | 'COMPLETED' | 'CANCELLED';
 export type TaskStatus = 'TODO' | 'IN_PROGRESS' | 'REVIEW' | 'DONE';
-  export type TaskPriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
+export type TaskPriority = 'LOW' | 'MEDIUM' | 'HIGH' | 'URGENT';
 
 // Auth types
 export interface User {

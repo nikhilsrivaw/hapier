@@ -31,6 +31,7 @@
           priority?: string;
           dueDate?: string;
           assigneeId?: string;
+          projectId?: string;
       }) => {
           const newTask = await taskService.create(data);
           setTasks((prev) => [newTask, ...prev]);
@@ -44,6 +45,7 @@
           priority?: string;
           dueDate?: string;
           assigneeId?: string | null;
+          projectId?: string | null;
       }) => {
           const updatedTask = await taskService.update(id, data);
           setTasks((prev) => prev.map((t) => (t.id === id ? updatedTask : t)));

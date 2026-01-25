@@ -14,6 +14,8 @@ export const ROUTES = {
     LEAVES: '/leaves',
     DEPARTMENTS: '/departments',
     SETTINGS: '/settings',
+    TASKS: '/tasks',
+    PROJECTS: '/projects',
 } as const;
 
 
@@ -30,12 +32,12 @@ export const EMPLOYEE_STATUS = {
     TERMINATED: 'TERMINATED',
     ON_LEAVE: 'ON_LEAVE',
 } as const;
- export const LEAVE_STATUS = {
+export const LEAVE_STATUS = {
     PENDING: 'PENDING',
     APPROVED: 'APPROVED',
     REJECTED: 'REJECTED',
     CANCELLED: 'CANCELLED',
-  } as const;
+} as const;
 export const ATTENDANCE_STATUS = {
     PRESENT: 'PRESENT',
     ABSENT: 'ABSENT',
