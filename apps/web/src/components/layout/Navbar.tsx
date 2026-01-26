@@ -3,12 +3,13 @@
   import { useState } from 'react';
   import { useRouter } from 'next/navigation';
   import { motion, AnimatePresence } from 'framer-motion';
-  import { Bell, Search, LogOut, User, ChevronDown, Menu } from 'lucide-react';
+  import { Bell,  LogOut, User, ChevronDown, Menu } from 'lucide-react';
   import { useAuthStore } from '@/store/auth';
   import { ROUTES } from '@/config/constants';
   import { Logo, ThemeToggle } from '@/components/common';
   import { Button } from '@/components/ui/button';
-  import { Input } from '@/components/ui/input';
+
+  import AISearch from '@/components/search/AISearch';
 
   interface NavbarProps {
       onMenuClick: () => void;
@@ -40,18 +41,9 @@
                       <Logo />
                   </div>
 
-                  {/* Center - Search */}
+                  {/* Center - AI Search */}
                   <div className="hidden md:flex flex-1 max-w-md mx-8">
-                      <div className="relative w-full">
-                          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4
-  text-gray-400" />
-                          <Input
-                              type="text"
-                              placeholder="Search employees, departments..."
-                              className="w-full pl-10 bg-gray-50 dark:bg-gray-800 border-gray-200       
-  dark:border-gray-700 focus:bg-white dark:focus:bg-gray-800"
-                          />
-                      </div>
+                      <AISearch />
                   </div>
 
                   {/* Right */}

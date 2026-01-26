@@ -8,6 +8,7 @@
   import { useEmployees } from '@/hooks/useEmployees';
   import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';  
   import { Button } from '@/components/ui/button';
+   import AIReportGenerator from '@/components/reports/AIReportGenrator';
   import {
     Select,
     SelectContent,
@@ -229,6 +230,7 @@
                   </CardContent>
                 </Card>
               </motion.div>
+              <AIReportGenerator />
 
               {/* Charts Row 1 */}
               <motion.div

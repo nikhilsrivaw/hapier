@@ -52,6 +52,7 @@ import {
     useDroppable,
     useDraggable,
 } from '@dnd-kit/core';
+import AssigneeSuggestion from '@/components/tasks/AssigneeSuggestion';
 
 const STATUS_LABELS: Record<TaskStatus, string> = {
     TODO: 'To Do',
@@ -671,6 +672,16 @@ export default function TasksPage() {
                                             ))}
                                         </SelectContent>
                                     </Select>
+                                    {/* AI Assignee Suggestion */}
+                                    <AssigneeSuggestion
+                                        taskTitle={formData.title}
+                                        taskDescription={formData.description}
+                                        projectId={formData.projectId}
+                                        onSelect={(employeeId) => setFormData({
+                                            ...formData, assigneeId:
+                                                employeeId
+                                        })}
+                                    />
                                 </div>
                             </div>
                             <div className="space-y-2">
@@ -711,11 +722,11 @@ export default function TasksPage() {
 
                 {/* Edit Dialog */}
                 <Dialog open={isEditOpen} onOpenChange={setIsEditOpen}>
-                    <DialogContent className="sm:max-w-lg">
+                   <DialogContent className="sm:max-w-lg max-h-[90vh] overflow-y-auto">
                         <DialogHeader>
                             <DialogTitle>Edit Task</DialogTitle>
                         </DialogHeader>
-                        <div className="space-y-4 py-4">
+                       <div className="space-y-4 py-4 max-h-[60vh] overflow-y-auto pr-2">
                             <div className="space-y-2">
                                 <Label htmlFor="edit-title">Title *</Label>
                                 <Input
