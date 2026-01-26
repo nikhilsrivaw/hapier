@@ -8,6 +8,7 @@
   import { PageLoader } from '@/components/common';
   import Navbar from './Navbar';
   import Sidebar from './Sidebar';
+import ChatWidget from '../chat/ChatWidget';
 
   interface DashboardLayoutProps {
       children: React.ReactNode;
@@ -74,6 +75,7 @@
               <main className="pt-16 min-h-screen lg:hidden">
                   <div className="p-4">{children}</div>
               </main>
+              <ChatWidget />
           </div>
       );
   }

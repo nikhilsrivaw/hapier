@@ -22,6 +22,11 @@
     leaveTypes  LeaveType[]
     tasks       Task[]  
     projects Project[]
+     jobs            Job[]
+    candidates      Candidate[]
+    applications    Application[]
+    interviews      Interview[]
+    candidateNotes  CandidateNote[]
   }
 
   // Authentication & access control
@@ -58,6 +63,7 @@
     organization   Organization @relation(fields: [organizationId], references: [id])
 
     employees Employee[]
+     jobs        Job[] 
   }
 
   model Employee {
@@ -95,6 +101,9 @@
     assignedTasks Task[] @relation("TaskAssignee")
     createdTasks  Task[] @relation("TaskCreator")
     ownedProjects Project[] @relation("ProjectOwner")
+
+    interviews      Interview[]
+    candidateNotes  CandidateNote[]
   }
 
   enum Gender {
@@ -235,7 +244,179 @@
     COMPLETED
     CANCELLED
   }
+ 
 
+  model Job {
+      id               String          @id @default(uuid())
+      title            String
+      description      String?
+      requirements     String?
+      responsibilities String?
+      location         String?
+      jobType          JobType         @default(FULL_TIME)
+      experienceLevel  ExperienceLevel @default(MID)
+      salaryMin        Int?
+      salaryMax        Int?
+      status           JobStatus       @default(DRAFT)
+      departmentId     String?
+      department       Department?     @relation(fields: [departmentId], references: [id])
+      organizationId   String
+      organization     Organization    @relation(fields: [organizationId], references: [id])
+      applications     Application[]
+      interviews       Interview[]
+      createdAt        DateTime        @default(now())
+      updatedAt        DateTime        @updatedAt
+      closedAt         DateTime?
 
+      @@index([organizationId])
+      @@index([status])
+  }
 
-  
+  model Candidate {
+      id             String          @id @default(uuid())
+      firstName      String
+      lastName       String
+      email          String
+      phone          String?
+      resumeText     String?
+      resumeUrl      String?
+      linkedinUrl    String?
+      portfolioUrl   String?
+      currentCompany String?
+      currentRole    String?
+      experience     Int?
+      skills         String[]
+      source         CandidateSource @default(DIRECT)
+      organizationId String
+      organization   Organization    @relation(fields: [organizationId], references: [id])
+      applications   Application[]
+      interviews     Interview[]
+      notes          CandidateNote[]
+      createdAt      DateTime        @default(now())
+      updatedAt      DateTime        @updatedAt
+
+      @@unique([email, organizationId])
+      @@index([organizationId])
+  }
+
+  model Application {
+      id              String           @id @default(uuid())
+      candidateId     String
+      candidate       Candidate        @relation(fields: [candidateId], references: [id])
+      jobId           String
+      job             Job              @relation(fields: [jobId], references: [id])
+      stage           ApplicationStage @default(APPLIED)
+      rating          Int?
+      organizationId  String
+      organization    Organization     @relation(fields: [organizationId], references: [id])
+      appliedAt       DateTime         @default(now())
+      updatedAt       DateTime         @updatedAt
+      hiredAt         DateTime?
+      rejectedAt      DateTime?
+      rejectionReason String?
+
+      @@unique([candidateId, jobId])
+      @@index([organizationId])
+      @@index([jobId])
+      @@index([stage])
+  }
+
+  model Interview {
+      id             String          @id @default(uuid())
+      candidateId    String
+      candidate      Candidate       @relation(fields: [candidateId], references: [id])
+      jobId          String
+      job            Job             @relation(fields: [jobId], references: [id])
+      interviewerId  String
+      interviewer    Employee        @relation(fields: [interviewerId], references: [id])
+      scheduledAt    DateTime
+      duration       Int             @default(60)
+      type           InterviewType   @default(VIDEO)
+      location       String?
+      status         InterviewStatus @default(SCHEDULED)
+      feedback       String?
+      rating         Int?
+      organizationId String
+      organization   Organization    @relation(fields: [organizationId], references: [id])
+      createdAt      DateTime        @default(now())
+      updatedAt      DateTime        @updatedAt
+
+      @@index([organizationId])
+      @@index([candidateId])
+      @@index([scheduledAt])
+  }
+
+  model CandidateNote {
+      id             String       @id @default(uuid())
+      candidateId    String
+      candidate      Candidate    @relation(fields: [candidateId], references: [id])
+      authorId       String
+      author         Employee     @relation(fields: [authorId], references: [id])
+      content        String
+      organizationId String
+      organization   Organization @relation(fields: [organizationId], references: [id])
+      createdAt      DateTime     @default(now())
+
+      @@index([candidateId])
+  }
+
+  enum JobType {
+      FULL_TIME
+      PART_TIME
+      CONTRACT
+      INTERNSHIP
+      REMOTE
+  }
+
+  enum ExperienceLevel {
+      ENTRY
+      MID
+      SENIOR
+      LEAD
+      EXECUTIVE
+  }
+
+  enum JobStatus {
+      DRAFT
+      OPEN
+      PAUSED
+      CLOSED
+      FILLED
+  }
+
+  enum CandidateSource {
+      DIRECT
+      LINKEDIN
+      REFERRAL
+      JOB_BOARD
+      AGENCY
+      CAREER_PAGE
+      OTHER
+  }
+
+  enum ApplicationStage {
+      APPLIED
+      SCREENING
+      INTERVIEW
+      OFFER
+      HIRED
+      REJECTED
+      WITHDRAWN
+  }
+
+  enum InterviewType {
+      PHONE
+      VIDEO
+      IN_PERSON
+      TECHNICAL
+      HR
+      FINAL
+  }
+
+  enum InterviewStatus {
+      SCHEDULED
+      COMPLETED
+      CANCELLED
+      NO_SHOW
+      RESCHEDULED
+  }

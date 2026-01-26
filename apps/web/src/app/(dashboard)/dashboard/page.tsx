@@ -8,6 +8,7 @@
   import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
   import { Button } from '@/components/ui/button';
   import { LoadingSpinner, ErrorMessage } from '@/components/common';
+   import AIInsights from '@/components/dashboard/AIInsights';
   import {
       Users,
       Building2,
@@ -165,6 +166,7 @@
                           );
                       })}
                   </motion.div>
+                  <AIInsights />
 
                   {/* Quick Actions */}
                   <motion.div
