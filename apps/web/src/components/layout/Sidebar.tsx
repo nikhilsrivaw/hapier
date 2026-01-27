@@ -13,6 +13,7 @@ import {
   FolderKanban,
   Settings,
   ChevronLeft,
+  Briefcase
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ROUTES } from '@/config/constants';
@@ -26,6 +27,8 @@ const menuItems = [
   { name: 'Settings', href: ROUTES.SETTINGS, icon: Settings, color: 'gray' },
   { name: 'Tasks', href: ROUTES.TASKS, icon: CheckSquare, color: 'emerald' },
   { name: 'Projects', href: ROUTES.PROJECTS, icon: FolderKanban, color: 'cyan' },
+ { name: 'Recruitment', href: ROUTES.RECRUITMENT, icon: Briefcase, color: 'violet' },
+
 ];
 
 const colorMap: Record<string, { bg: string; text: string; hover: string }> = {
