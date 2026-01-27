@@ -10,6 +10,7 @@
   import taskRoutes from './modules/task/task.routes';
    import projectRoutes from './modules/project/project.routes';
       import aiRoutes from './modules/ai/ai.routes'; 
+      import recruitmentRoutes from './modules/recruitment/recruitment.routes';
 
   dotenv.config();
 
@@ -29,6 +30,7 @@
    app.use('/api/tasks', taskRoutes);
    app.use('/api/projects', projectRoutes);
    app.use('/api/ai', aiRoutes);
+app.use('/api/recruitment', recruitmentRoutes);
 
     
 

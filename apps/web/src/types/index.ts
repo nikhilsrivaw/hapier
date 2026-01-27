@@ -254,3 +254,122 @@ export interface DashboardStats {
   attendancePercentage: number;
 }
 
+// ==================== RECRUITMENT TYPES ====================                                        
+  
+  export type JobType = 'FULL_TIME' | 'PART_TIME' | 'CONTRACT' | 'INTERNSHIP' | 'REMOTE';
+  export type ExperienceLevel = 'ENTRY' | 'MID' | 'SENIOR' | 'LEAD' | 'EXECUTIVE';
+  export type JobStatus = 'DRAFT' | 'OPEN' | 'PAUSED' | 'CLOSED' | 'FILLED';
+  export type CandidateSource = 'DIRECT' | 'LINKEDIN' | 'REFERRAL' | 'JOB_BOARD' | 'AGENCY' |
+  'CAREER_PAGE' | 'OTHER';
+  export type ApplicationStage = 'APPLIED' | 'SCREENING' | 'INTERVIEW' | 'OFFER' | 'HIRED' | 'REJECTED' 
+  | 'WITHDRAWN';
+  export type InterviewType = 'PHONE' | 'VIDEO' | 'IN_PERSON' | 'TECHNICAL' | 'HR' | 'FINAL';
+  export type InterviewStatus = 'SCHEDULED' | 'COMPLETED' | 'CANCELLED' | 'NO_SHOW' | 'RESCHEDULED';    
+
+  export interface Job {
+      id: string;
+      title: string;
+      description?: string;
+      requirements?: string;
+      responsibilities?: string;
+      location?: string;
+      jobType: JobType;
+      experienceLevel: ExperienceLevel;
+      salaryMin?: number;
+      salaryMax?: number;
+      status: JobStatus;
+      departmentId?: string;
+      department?: Department;
+      organizationId: string;
+      applications?: Application[];
+      interviews?: Interview[];
+      _count?: { applications: number };
+      createdAt: string;
+      updatedAt: string;
+      closedAt?: string;
+  }
+
+  export interface Candidate {
+      id: string;
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone?: string;
+      resumeText?: string;
+      resumeUrl?: string;
+      linkedinUrl?: string;
+      portfolioUrl?: string;
+      currentCompany?: string;
+      currentRole?: string;
+      experience?: number;
+      skills: string[];
+      source: CandidateSource;
+      organizationId: string;
+      applications?: Application[];
+      interviews?: Interview[];
+      notes?: CandidateNote[];
+      _count?: { interviews: number; notes: number };
+      createdAt: string;
+      updatedAt: string;
+  }
+
+  export interface Application {
+      id: string;
+      candidateId: string;
+      candidate?: Candidate;
+      jobId: string;
+      job?: Job;
+      stage: ApplicationStage;
+      rating?: number;
+      organizationId: string;
+      appliedAt: string;
+      updatedAt: string;
+      hiredAt?: string;
+      rejectedAt?: string;
+      rejectionReason?: string;
+  }
+
+  export interface Interview {
+      id: string;
+      candidateId: string;
+      candidate?: Candidate;
+      jobId: string;
+      job?: Job;
+      interviewerId: string;
+      interviewer?: Employee;
+      scheduledAt: string;
+      duration: number;
+      type: InterviewType;
+      location?: string;
+      status: InterviewStatus;
+      feedback?: string;
+      rating?: number;
+      organizationId: string;
+      createdAt: string;
+      updatedAt: string;
+  }
+
+  export interface CandidateNote {
+      id: string;
+      candidateId: string;
+      authorId: string;
+      author?: Employee;
+      content: string;
+      organizationId: string;
+      createdAt: string;
+  }
+
+  export interface RecruitmentAnalytics {
+      overview: {
+          totalJobs: number;
+          openJobs: number;
+          totalCandidates: number;
+          totalApplications: number;
+          recentHires: number;
+          avgTimeToHire: number;
+      };
+      pipeline: Record<ApplicationStage, number>;
+      sources: Record<CandidateSource, number>;
+  }
+
+

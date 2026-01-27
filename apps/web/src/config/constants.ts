@@ -16,6 +16,12 @@ export const ROUTES = {
     SETTINGS: '/settings',
     TASKS: '/tasks',
     PROJECTS: '/projects',
+    RECRUITMENT: '/recruitment',
+    JOBS: '/recruitment/jobs',
+    JOB_DETAIL: '/recruitment/jobs',
+    CANDIDATES: '/recruitment/candidates',
+    CANDIDATE_DETAIL: '/recruitment/candidates',
+    INTERVIEWS: '/recruitment/interviews',
 } as const;
 
 
